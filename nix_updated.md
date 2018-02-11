@@ -54,7 +54,7 @@ boot  etc  home      lib64  mnt    proc  run   srv   tmp  var
 
 * A Unix filesystem has a few special shortcuts to refer to specific locations. `/` indicates the *root* of the filesystem, meaning the top-most directory in the filesystem hierarchy. Use the `cd` ("change directory") command to move to the root directory. (Hint: Use `man` to look up the `cd` command if you have any issues) *Then run `pwd` and paste the output here:*
 
-/home/cabox
+/
 
 * Another special shortcut in Unix is the `~` location. This indicates the *user root* directory, meaning the top-most directory in the hierarchy that comes below your user account. Use `cd` to move to `~`. *Run `pwd` and paste the response here:*
 
@@ -92,8 +92,7 @@ cabox
 
 * Discover who else is on your system with the `who` command. *Are any other users using your system? If so, list them here:*
 
-cabox    pts/0        Feb  6 22:55 (52.161.27.120)
-cabox    pts/1        Feb  6 22:47 (52.161.27.120)
+cabox    pts/0        Jan 21 19:48 (52.161.27.120)
 
 * How long has your system been running? Use `uptime` to see, and *paste the result here:*
 
@@ -130,7 +129,9 @@ cabox      788  0.0  0.4  15520  1140 pts/0    R+   21:52   0:00ps aux
 ```
 
 * Run `top` and review the results. (Hint: You may need to use `ctrl-c` to get out of this app.) *How do you interpret what you see here?*
+
 ```
+
 USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 root         1  0.0  0.9  33188  2516 ?        Ss   19:00   0:00 init
 root         2  0.0  0.0      0     0 ?        S    19:00   0:00 [kthreadd/1498
@@ -157,34 +158,101 @@ cabox      928  0.0  0.4  15520  1144 pts/0    R+   19:54   0:00 ps aux
 
 ### Finding and Viewing Files
 
-* Make sure you are in the `challenge_files` directory. Use the `*` wildcard to find all the files that have the word "*credit*" in the filename. *How many files did you find?*
-```
-2 files
-```
+* Make sure you are in the `challenge_files` directory. Use the `*` wildcard to find all the files that have the word "credit" in the filename. *How many files did you find?*
+`
+2 files:
+credit_cards.txt
+credit_cards2.txt
+`
+
 * Use the `more` command to view one of the `credit_cards` files you just discovered. (Hint: Type `q` to quit viewing the file. Press the `spacebar` to page down. Use your keyboard arrows to move up/down.) *What is the date in the file you have viewed?*
-```
+
 01-15-2015
-```
 
 * Use the `find` command to search for files more effectively. Search the sub-directories under `challenge_files` to find the location of the file named `modi_laboriosam.txt`. *Where is that file located?*
 
-```
 find . -name modi_laboriosam.txt
 ./tmp/modi_laboriosam.txt
-```
+
+* Use the `grep` command to search for text within a file. Use `grep` on all the `.user` files in `challenge_files` to find which files contain "WA" (the abbreviation for Washington state). *How many files did you find?*
+*Debbie: grep ir "wa"*
+
+`
+2 files:
+Lissie-Strosin.user
+Britt-Erdman.user
+`
 
 * Use the `-r` option of `grep` to *recursively* find the text "Waldo" hidden in a file somewhere under the `challenge_files` directory. *Paste the result showing the file and line where the word "Waldo" shows up.*
-
-
+`
+serial-numbers/eaque_molestiae.txt:Ut est maiores quia autem. Nisi modi Waldo sed corporis sit explicabo ut est. Et est placeat ea sunt sunt consectetur suntincidunt. Explicabo vel esse blanditiis dolorem culpa non quia.
+`
 
 ### Pipes and Connecting Commands
 
 * Sometimes it's useful to output the results of a command to a text file for further analysis, reference, or processing. Try running `ls > files.txt`. Notice that the file `files.txt` was created. View that file using `more`. *What do you see in the `files.txt` file?*
 
-
+`
+01
+2015_special_stuff.demo
+Afton-Jast.user
+Aimee-Maggio.user
+Alfonso-Gottlieb.user
+Allen-Kemmer.user
+Almina-Cormier.user
+Alta-Lemke.user
+Amina-McGlynn.user
+Anabel-Hammes.user
+Ancel-Conn.user
+Anjali-Halvorson.user
+Ardath-Kuvalis.user
+Avah-Dickinson.user
+Ayaan-Stiedemann.user
+Aylin-Grant.user
+Bedford-Sipes.user
+Benita-King.user
+Benito-Stoltenberg.user
+Beverlee-Moen.user
+Brad-Thiel.user
+Brayan-Douglas.user
+Bria-Satterfield.user
+Bridgette-Reichel.user
+Britt-Erdman.user
+Britta-Hammes.user
+Bryant-Kuhic.user
+Bryton-Aufderhar.user
+Caitlin-Grady.user
+Carroll-Hartmann.user
+Claudie-McClure.user
+Clemente-Haley.user
+Cleo-VonRueden.user
+Codie-Romaguera.user
+Cooper-Reynolds.user
+Corrie-Bogisich.user
+Dannielle-Green.user
+Deedee-Jacobson.user
+Desiree-Marks.user
+Deven-Rutherford.user
+Doyle-Jones.user
+Dustyn-O'Connell.user
+Elza-Mraz.user
+Emory-Crona.user
+Erin-Walker.user
+Estela-Schultz.user
+Fernanda-Tromp.user
+`
 
 * Notice that if you run `ls -alh` in the `challenge_files` directory, the files scroll by very quickly. Sometimes it would be better to get the results in a paginated format. Try running `ls -alh | more`. *Describe what you see when you run `ls -alh | more`.*
 
-
+`
+The same files are listed, but is halved. To view the full list, you have to press Enter for 'more', it's not fully displayed, which makes it easier to read (initially).
+`
 
 * Earlier, when you viewed the list of active processes on your devbox using `ps aux`, the list was probably really long. You can make this list more manageable by using the pipe (`|`) to filter the results of `ps` using `grep`. Run `ps aux | grep <your_username>` to see what processes are running for your specific user. *Paste the list of processes that reference your username here:*
+
+`
+ps aux | grep <dfoong>
+-bash: syntax error near unexpected token `newline'
+`
+
+
